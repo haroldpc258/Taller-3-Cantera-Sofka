@@ -6,12 +6,12 @@ public class Song {
     private String title;
     private String id;
     private LocalDate releaseDate;
-    private float duration;
+    private int duration;
     private String genre;
     private String cover;
     private String description;
 
-    public Song(String title, String id, LocalDate releaseDate, float duration, String genre, String cover, String description) {
+    public Song(String title, String id, LocalDate releaseDate, int duration, String genre, String cover, String description) {
         this.title = title;
         this.id = id;
         this.releaseDate = releaseDate;
@@ -33,7 +33,7 @@ public class Song {
         return this.releaseDate;
     }
 
-    public float getDuration() {
+    public int getDuration() {
         return this.duration;
     }
 
@@ -42,7 +42,7 @@ public class Song {
     }
 
     public String getCover() {
-        return this.genre;
+        return this.cover;
     }
 
     public String getDescription() {
