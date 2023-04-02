@@ -1,25 +1,50 @@
+/**
+ * La clase Manager es la encargada de gestionar la biblioteca de canciones y ofrece métodos para realizar
+ * diferentes acciones sobre la biblioteca como agregar una canción, crear una lista de reproducción,
+ * filtrar canciones por género o año, ordenar canciones por duración o fecha, y mostrar una lista de canciones.
+ */
 package SongManager;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class Manager {
+    /**
+     * La lista de canciones que conforman la biblioteca.
+     */
+    private final List<Song> library;
 
-    private List<Song> library;
-
+    /**
+     * El constructor de la clase Manager que inicializa la biblioteca como una lista vacía de canciones.
+     */
     public Manager() {
         this.library = new ArrayList<Song>();
     }
 
+    /**
+     * Retorna la lista de canciones que conforman la biblioteca.
+     *
+     * @return la lista de canciones que conforman la biblioteca.
+     */
     public List<Song> getLibrary() {
         return this.library;
     }
 
+    /**
+     * Agrega una canción a la biblioteca.
+     *
+     * @param song la canción que se desea agregar.
+     */
     public void addSong(Song song) {
         this.library.add(song);
     }
 
+    /**
+     * Crea una lista de reproducción a partir de una lista de ids de canciones.
+     *
+     * @param songIds la lista de ids de las canciones que se desean agregar a la lista de reproducción.
+     * @return la lista de canciones que conforman la lista de reproducción.
+     */
     public List<Song> createPlaylist(List<String> songIds) {
         List<Song> playlist = new ArrayList<Song>();
         for (String id : songIds) {
@@ -32,6 +57,12 @@ public class Manager {
         return playlist;
     }
 
+    /**
+     * Filtra las canciones de la biblioteca por género.
+     *
+     * @param genreFilter el género por el cual se desea filtrar las canciones.
+     * @return la lista de canciones que cumplen con el filtro de género.
+     */
     public List<Song> filterByGenre(String genreFilter) {
         List<Song> filteredSongs = new ArrayList<Song>();
         for (Song song : this.library) {
@@ -42,6 +73,12 @@ public class Manager {
         return filteredSongs;
     }
 
+    /**
+     * Filtra las canciones de la biblioteca por año de lanzamiento.
+     *
+     * @param yearFilter el año por el cual se desea filtrar las canciones.
+     * @return la lista de canciones que cumplen con el filtro de año.
+     */
     public List<Song> filterByYear(int yearFilter) {
         List<Song> filteredSongs = new ArrayList<Song>();
         for (Song song : this.library) {
@@ -53,9 +90,25 @@ public class Manager {
         return filteredSongs;
     }
 
+/**
+ * Ordena las canciones de la biblioteca por duración.
+ *
+ * @param ascendant si es verdadero, la lista de canciones se ordena de manera ascendente por duración, de lo contrario, se ordena de manera descendente.
+ * @return la lista de canciones ordenada por duración.
+ */
     public List<Song> orderByDuration(boolean ascendant) {
         List<Song> orderedSongs = new ArrayList<Song>(this.library);
         orderedSongs.sort(new Comparator<Song>() {
+            /**
+             * Compara la duración de dos canciones y devuelve un entero
+             * que indica el orden relativo de las canciones en función
+             * de su duración.
+             * @param song1 la primera canción a comparar
+             * @param song2 la segunda canción a comparar
+             * @return -1 si la primera canción es más corta que la segunda,
+             *          0 si tienen la misma duración
+             *          1 si la primera canción es más larga que la segunda
+             */
             @Override
             public int compare(Song song1, Song song2) {
                 if (ascendant) {
@@ -68,9 +121,27 @@ public class Manager {
         return orderedSongs;
     }
 
+    /**
+     * Devuelve una lista ordenada de canciones por fecha de lanzamiento
+     * en orden ascendente o descendente según el valor del parámetro
+     * 'ascendant'.
+     * @param ascendant true si se desea un orden ascendente, false si se
+     *                  desea un orden descendente
+     * @return una lista ordenada de canciones por fecha de lanzamiento
+     */
     public List<Song> orderByDate(boolean ascendant) {
         List<Song> orderedSongs = new ArrayList<Song>(this.library);
         orderedSongs.sort(new Comparator<Song>() {
+            /**
+             * Compara la fecha de lanzamiento de dos canciones y devuelve un entero
+             * que indica el orden relativo de las canciones en función de su fecha
+             * de lanzamiento.
+             * @param song1 la primera canción a comparar
+             * @param song2 la segunda canción a comparar
+             * @return -1 si la primera canción se lanzó antes que la segunda,
+             *          0 si se lanzaron en la misma fecha
+             *          1 si la primera canción se lanzó después que la segunda
+             */
             @Override
             public int compare(Song song1, Song song2) {
                 if (ascendant) {
@@ -83,16 +154,19 @@ public class Manager {
         return orderedSongs;
     }
 
-    public String showSongs(List<Song> songs) {
+    /**
+     * Genera una lista de canciones formateada para mostrar en consola.
+     * @param songsToShow la lista de canciones a mostrar
+     * @param songList el título de la lista de canciones
+     * @return una cadena de caracteres formateada para mostrar en consola
+     */
+    public String showSongs(List<Song> songsToShow, String songList) {
         StringBuilder sb = new StringBuilder();
-        sb.append("SONGS:\n");
+        sb.append(songList).append("\n");
         sb.append(String.format("%-5s | %-25s | %-10s | %-8s | %-10s | %-26s | %-30s\n", "ID", "Título", "Fecha", "Duración", "Género", "Carátula", "Descripción"));
-        for (Song song : songs) {
+        for (Song song : songsToShow) {
             sb.append(String.format("%-5s | %-25s | %-10s | %-7d s| %-10s | %-26s | %-30s\n", song.getId(), song.getTitle(), song.getReleaseDate().toString(), song.getDuration(), song.getGenre(), song.getCover(), song.getDescription()));
         }
         return sb.toString();
     }
-
-
-
 }
