@@ -98,24 +98,21 @@ public class Manager {
  */
     public List<Song> orderByDuration(boolean ascendant) {
         List<Song> orderedSongs = new ArrayList<Song>(this.library);
-        orderedSongs.sort(new Comparator<Song>() {
-            /**
-             * Compara la duración de dos canciones y devuelve un entero
-             * que indica el orden relativo de las canciones en función
-             * de su duración.
-             * @param song1 la primera canción a comparar
-             * @param song2 la segunda canción a comparar
-             * @return -1 si la primera canción es más corta que la segunda,
-             *          0 si tienen la misma duración
-             *          1 si la primera canción es más larga que la segunda
-             */
-            @Override
-            public int compare(Song song1, Song song2) {
-                if (ascendant) {
-                    return Integer.compare(song1.getDuration(), song2.getDuration());
-                } else {
-                    return Integer.compare(song2.getDuration(), song1.getDuration());
-                }
+        /**
+         * Compara la duración de dos canciones y devuelve un entero
+         * que indica el orden relativo de las canciones en función
+         * de su duración.
+         * @param song1 la primera canción a comparar
+         * @param song2 la segunda canción a comparar
+         * @return -1 si la primera canción es más corta que la segunda,
+         *          0 si tienen la misma duración
+         *          1 si la primera canción es más larga que la segunda
+         */
+        orderedSongs.sort((song1, song2) -> {
+            if (ascendant) {
+                return Integer.compare(song1.getDuration(), song2.getDuration());
+            } else {
+                return Integer.compare(song2.getDuration(), song1.getDuration());
             }
         });
         return orderedSongs;
@@ -131,28 +128,26 @@ public class Manager {
      */
     public List<Song> orderByDate(boolean ascendant) {
         List<Song> orderedSongs = new ArrayList<Song>(this.library);
-        orderedSongs.sort(new Comparator<Song>() {
-            /**
-             * Compara la fecha de lanzamiento de dos canciones y devuelve un entero
-             * que indica el orden relativo de las canciones en función de su fecha
-             * de lanzamiento.
-             * @param song1 la primera canción a comparar
-             * @param song2 la segunda canción a comparar
-             * @return -1 si la primera canción se lanzó antes que la segunda,
-             *          0 si se lanzaron en la misma fecha
-             *          1 si la primera canción se lanzó después que la segunda
-             */
-            @Override
-            public int compare(Song song1, Song song2) {
-                if (ascendant) {
-                    return song1.getReleaseDate().compareTo(song2.getReleaseDate());
-                } else {
-                    return song2.getReleaseDate().compareTo(song1.getReleaseDate());
-                }
+        /**
+         * Compara la fecha de lanzamiento de dos canciones y devuelve un entero
+         * que indica el orden relativo de las canciones en función de su fecha
+         * de lanzamiento.
+         * @param song1 la primera canción a comparar
+         * @param song2 la segunda canción a comparar
+         * @return -1 si la primera canción se lanzó antes que la segunda,
+         *          0 si se lanzaron en la misma fecha
+         *          1 si la primera canción se lanzó después que la segunda
+         */
+        orderedSongs.sort((song1, song2) -> {
+            if (ascendant) {
+                return song1.getReleaseDate().compareTo(song2.getReleaseDate());
+            } else {
+                return song2.getReleaseDate().compareTo(song1.getReleaseDate());
             }
         });
         return orderedSongs;
     }
+
 
     /**
      * Genera una lista de canciones formateada para mostrar en consola.
