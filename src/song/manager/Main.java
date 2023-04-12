@@ -7,10 +7,12 @@
  * @version 1.0
  * @since 28 de marzo de 2023
  */
-package SongManager;
+package song.manager;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.System.*;
 
 public class Main {
     /**
@@ -21,7 +23,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        Manager songmanager = new Manager(); //crea un objeto de la clase Manager para administrar las canciones
+        final Manager songmanager = new Manager(); //crea un objeto de la clase Manager para administrar las canciones
 
         // Agrega canciones a la biblioteca de canciones
         songmanager.addSong(new Song("Bohemian Rhapsody", "1", LocalDate.of(1975, 10, 31), 354, "Rock", "bohemian-rhapsody.jpg", "Un himno clásico del rock"));
@@ -36,37 +38,37 @@ public class Main {
         songmanager.addSong(new Song("Viva la Vida", "10", LocalDate.of(2008, 6, 13), 242, "Rock", "viva-la-vida.jpg", "Un himno ascendente"));
 
         // Obtener la biblioteca de canciones y mostrarla en la consola.
-        List<Song> library = songmanager.getLibrary();
-        System.out.println(songmanager.showSongs(library, "BIBLIOTECA"));
-        System.out.println();
+        final List<Song> library = songmanager.getLibrary();
+        out.println(songmanager.showSongs(library, "BIBLIOTECA"));
+        out.println();
 
         // Crear una lista de Ids de canciones y crear una nueva playlist utilizando estos Ids.
-        List<String> songIds = new ArrayList<String>();
+        final List<String> songIds = new ArrayList<>();
         songIds.add("1");
         songIds.add("3");
         songIds.add("10");
-        List<Song> playlist = songmanager.createPlaylist(songIds);
-        System.out.println(songmanager.showSongs(playlist, "PLAYLIST"));
-        System.out.println();
+        final List<Song> playlist = songmanager.createPlaylist(songIds);
+        out.println(songmanager.showSongs(playlist, "PLAYLIST"));
+        out.println();
 
         // Filtrar las canciones de la biblioteca por género y mostrarlas en la consola.
-        List<Song> songsByGenre = songmanager.filterByGenre("Rock");
-        System.out.println(songmanager.showSongs(songsByGenre, "CANCIONES FILTRADAS"));
-        System.out.println();
+        final List<Song> songsByGenre = songmanager.filterByGenre("Rock");
+        out.println(songmanager.showSongs(songsByGenre, "CANCIONES FILTRADAS"));
+        out.println();
 
         // Filtrar las canciones de la biblioteca por año y mostrarlas en la consola.
-        List<Song> songsByYear = songmanager.filterByYear(2008);
-        System.out.println(songmanager.showSongs(songsByYear, "CANCIONES FILTRADAS"));
-        System.out.println();
+        final List<Song> songsByYear = songmanager.filterByYear(2008);
+        out.println(songmanager.showSongs(songsByYear, "CANCIONES FILTRADAS"));
+        out.println();
 
         // Ordenar las canciones de la biblioteca por fecha y mostrarlas en la consola.
-        List<Song> songsByDate = songmanager.orderByDate(true);
-        System.out.println(songmanager.showSongs(songsByDate, "CANCIONES ORDENADAS"));
-        System.out.println();
+        final List<Song> songsByDate = songmanager.orderByDate(true);
+        out.println(songmanager.showSongs(songsByDate, "CANCIONES ORDENADAS"));
+        out.println();
 
         // Ordenar las canciones de la biblioteca por duración y mostrarlas en la consola.
-        List<Song> songsByDuration = songmanager.orderByDuration(true);
-        System.out.println(songmanager.showSongs(songsByDuration, "CANCIONES ORDENADAS"));
+        final List<Song> songsByDuration = songmanager.orderByDuration(true);
+        out.println(songmanager.showSongs(songsByDuration, "CANCIONES ORDENADAS"));
 
     }
 }

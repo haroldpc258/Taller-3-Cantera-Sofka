@@ -2,17 +2,17 @@
  * La clase Song representa una composición musical, incluyendo su título, identificador, fecha de lanzamiento, duración, género, portada y descripción.
  * Esta clase proporciona métodos para recuperar cada uno de estos atributos.
  */
-package SongManager;
+package song.manager;
 import java.time.LocalDate;
 
 public class Song {
-    private String title;        //el título de la canción
-    private String id;           //el identificador único de la canción
-    private LocalDate releaseDate; //la fecha de lanzamiento de la canción
-    private int duration;        //la duración de la canción en segundos
-    private String genre;        //el género musical de la canción
-    private String cover;        //el nombre del archivo de imagen de portada de la canción
-    private String description;  //la descripción de la canción
+    final private String title;        //el título de la canción
+    final private String id;           //el identificador único de la canción
+    final private LocalDate releaseDate; //la fecha de lanzamiento de la canción
+    final private int duration;        //la duración de la canción en segundos
+    final private String genre;        //el género musical de la canción
+    final private String cover;        //el nombre del archivo de imagen de portada de la canción
+    final private String description;  //la descripción de la canción
 
     /**
      * Crea una nueva canción con los parámetros especificados.
